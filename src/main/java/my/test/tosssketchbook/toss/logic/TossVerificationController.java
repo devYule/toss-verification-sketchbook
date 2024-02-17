@@ -22,6 +22,31 @@ import org.springframework.web.bind.annotation.*;
  * 8. 우리서버는 해당 정보에서 필요한 정보 (uuid, 이름, 성별, 생년월일, 지역) 를 리턴함.
  * 9. 차후 회원가입시 uuid 를 또다시 보내게 되고, 그러면 앞서 저장해둔 db의 txId 를 가진 테이블과 조인을 통해
  *      해당 유저의 본인인증 정보를 조회할 수 있음.
+ *
+ *      * 인증 요청 *
+ *      localhost:8080/api/verification/toss/verification
+ *      -> {
+ *              "userName": "조현민",
+ *              "userPhone": "01065570125",
+ *              "userBirthday": "19920125"
+ *          }
+ *      * 인증 응답 *
+ *      -> {
+ *              "resultType": "SUCCESS",
+ *              "uuid": "889a0ab4-1904-40f8-91dc-3bfd5570a7db"
+ *          }
+ *
+ *
+ *      * 체크 요청 *
+ *      localhost:8080/api/verification/toss/check?uuid=9da3767c-fc31-458e-a0c4-5056d91e5619
+ *      (테스트여서 회원 정보는 임의의 정보로 보내게 되어있음)
+ *      -> {
+ *              "uuid": "9da3767c-fc31-458e-a0c4-5056d91e5619",
+ *              "name": "김토스",
+ *              "birthday": "19930324",
+ *              "gender": "FEMALE",
+ *              "nationality": "LOCAL"
+ *          }
  */
 @RestController
 @RequiredArgsConstructor
